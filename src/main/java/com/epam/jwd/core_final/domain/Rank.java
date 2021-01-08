@@ -26,7 +26,7 @@ public enum Rank implements BaseEntity {
      */
     @Override
     public String getName() {
-        return null;
+        return name();
     }
 
     /**
@@ -36,8 +36,7 @@ public enum Rank implements BaseEntity {
      */
     public static Rank resolveRankById(Long id) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.getId()
-                .equals(id))
+                .filter(rank -> rank.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new UnknownEntityException("Such rank does not exist"));
     }
