@@ -8,10 +8,11 @@ package com.epam.jwd.core_final.domain;
  */
 public abstract class AbstractBaseEntity implements BaseEntity {
 
+    private static Long idCounter = 0L;
+
     @Override
     public Long getId() {
-        // todo
-        return null;
+        return idCounter++;
     }
 
     @Override
