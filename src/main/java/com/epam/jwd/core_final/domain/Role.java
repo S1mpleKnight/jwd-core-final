@@ -36,6 +36,6 @@ public enum Role implements BaseEntity {
         return Arrays.stream(Role.values())
                 .filter(rank -> rank.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new UnknownEntityException("Such rank does not exist"));
+                .orElseThrow(() -> new UnknownEntityException("Role", new Object[]{"id = " + id}));
     }
 }

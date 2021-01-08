@@ -38,6 +38,6 @@ public enum Rank implements BaseEntity {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new UnknownEntityException("Such rank does not exist"));
+                .orElseThrow(() -> new UnknownEntityException("Rank", new Object[]{"id = " + id}));
     }
 }

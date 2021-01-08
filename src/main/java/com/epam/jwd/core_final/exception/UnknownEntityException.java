@@ -1,5 +1,8 @@
 package com.epam.jwd.core_final.exception;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class UnknownEntityException extends RuntimeException {
 
     private final String entityName;
@@ -19,8 +22,17 @@ public class UnknownEntityException extends RuntimeException {
 
     @Override
     public String getMessage() {
+        String message;
+        if (args == null){
+            message = "Exception happened on " + entityName;
+        } else {
+            String params = Arrays.stream(args)
+                    .map(s -> (String) s)
+                    .collect(Collectors.joining(", "));
+            message = "Exception happened on " + entityName + " with args:\n" + params;
+        }
         // todo
         // you should use entityName, args (if necessary)
-        return null;
+        return message;
     }
 }

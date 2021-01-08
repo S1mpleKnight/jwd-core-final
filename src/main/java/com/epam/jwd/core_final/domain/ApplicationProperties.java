@@ -31,6 +31,5 @@ public class ApplicationProperties {
         this.fileRefreshRate = fileRefreshRate;
         this.dateTimeFormat = dateTimeFormat;
     }
-
     //todo
 }

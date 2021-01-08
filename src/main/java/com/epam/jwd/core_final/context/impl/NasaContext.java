@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 // todo
-public class NassaContext implements ApplicationContext {
+public class NasaContext implements ApplicationContext {
 
     // no getters/setters for them
     private Collection<CrewMember> crewMembers = new ArrayList<>();
@@ -27,6 +27,7 @@ public class NassaContext implements ApplicationContext {
      */
     @Override
     public void init() throws InvalidStateException {
-        throw new InvalidStateException();
+        //todo
+        throw new InvalidStateException("TODO");
     }
 }
