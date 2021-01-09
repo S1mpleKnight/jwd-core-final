@@ -1,6 +1,8 @@
 package com.epam.jwd.core_final.context.impl;
 
+import com.epam.jwd.core_final.context.Application;
 import com.epam.jwd.core_final.context.ApplicationContext;
+import com.epam.jwd.core_final.domain.ApplicationProperties;
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Spaceship;

@@ -30,8 +30,6 @@ public class InvalidStateException extends Exception {
                     .collect(Collectors.joining(", "));
             message = "Exception happened with " + state + " with args:\n" + params;
         }
-        // todo
-        // you should use entityName, args (if necessary)
         return message;
     }
 }

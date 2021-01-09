@@ -15,6 +15,7 @@ package com.epam.jwd.core_final.domain;
  * dateTimeFormat {@link String} - date/time format for {@link java.time.format.DateTimeFormatter} pattern
  */
 public class ApplicationProperties {
+
     private final String inputRootDir;
     private final String outputRootDir;
     private final String crewFileName;
@@ -31,5 +32,4 @@ public class ApplicationProperties {
         this.fileRefreshRate = fileRefreshRate;
         this.dateTimeFormat = dateTimeFormat;
     }
-    //todo
 }

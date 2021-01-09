@@ -15,6 +15,7 @@ import java.util.List;
  * missionResult {@link MissionResult}
  */
 public class FlightMission extends AbstractBaseEntity {
+
     private final Long id;
     private final String name;
     private final LocalDate startDate;
