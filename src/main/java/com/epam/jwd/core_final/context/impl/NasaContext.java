@@ -1,26 +1,52 @@
 package com.epam.jwd.core_final.context.impl;
 
-import com.epam.jwd.core_final.context.Application;
 import com.epam.jwd.core_final.context.ApplicationContext;
 import com.epam.jwd.core_final.domain.ApplicationProperties;
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
+import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
+import com.epam.jwd.core_final.exception.UnknownEntityException;
+import com.epam.jwd.core_final.factory.EntityFactory;
+import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
+import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
+import com.epam.jwd.core_final.util.FilesInfoManipulator;
+import com.epam.jwd.core_final.util.PropertyReaderUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // todo
 public class NasaContext implements ApplicationContext {
 
+    private static final ApplicationProperties APPLICATION_PROPERTIES = PropertyReaderUtil.takeProperties();
+    private static final Logger LOGGER = LoggerFactory.getLogger(NasaContext.class);
+
     // no getters/setters for them
     private Collection<CrewMember> crewMembers = new ArrayList<>();
     private Collection<Spaceship> spaceships = new ArrayList<>();
+    private Collection<FlightMission> flightMissions = new ArrayList<>();
 
     @Override
-    public <T extends BaseEntity> Collection<T> retrieveBaseEntityList(Class<T> tClass) {
-        return null;
+    public <T extends BaseEntity> Collection<T> retrieveBaseEntityList(Class<T> tClass) throws UnknownEntityException{
+        Collection<T> neededList;
+        if (tClass == CrewMember.class){
+            neededList = (Collection<T>) crewMembers;
+        } else if (tClass == Spaceship.class){
+            neededList = (Collection<T>) spaceships;
+        } else if (tClass == FlightMission.class){
+            neededList = (Collection<T>) flightMissions;
+        } else {
+                throw new UnknownEntityException(tClass.getCanonicalName());
+        }
+        return neededList;
     }
 
     /**
@@ -29,7 +55,41 @@ public class NasaContext implements ApplicationContext {
      */
     @Override
     public void init() throws InvalidStateException {
-        //todo
-        throw new InvalidStateException("TODO");
+        try{
+            populateCrewMembersList(APPLICATION_PROPERTIES.getCrewFileName());
+            populateSpaceshipsList(APPLICATION_PROPERTIES.getSpaceshipsFileName());
+        } catch (IOException e){
+            LOGGER.error(e.getLocalizedMessage());
+            throw new InvalidStateException("TODO");
+        }
+    }
+
+    public static ApplicationProperties getApplicationProperties(){
+        return APPLICATION_PROPERTIES;
+    }
+
+    private void populateCrewMembersList(String path) throws IOException, InvalidStateException{
+        EntityFactory<CrewMember> factory = new CrewMemberFactory();
+        List<String> crewData = FilesInfoManipulator.readFile(path)
+                .stream()
+                .filter(s -> (s.charAt(0) != '#'))
+                .flatMap((s) -> Arrays.stream(s.split(";")))
+                .collect(Collectors.toList());
+        for (String crewDatum : crewData){
+            List<String> params = FilesInfoManipulator.separateString(crewDatum, ",");
+            crewMembers.add(factory.create(params.toArray()));
+        }
+    }
+
+    private void populateSpaceshipsList(String path) throws IOException, InvalidStateException{
+        EntityFactory<Spaceship> factory = new SpaceshipFactory();
+        List<String> spaceshipData = FilesInfoManipulator.readFile(path)
+                .stream()
+                .filter(s -> (s.charAt(0) != '#'))
+                .collect(Collectors.toList());
+        for (String spaceshipDatum : spaceshipData){
+            List<String> params = FilesInfoManipulator.separateString(spaceshipDatum, ";");
+            spaceships.add(factory.create(params.toArray()));
+        }
     }
 }

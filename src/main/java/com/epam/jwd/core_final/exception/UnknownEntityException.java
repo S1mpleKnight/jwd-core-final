@@ -24,12 +24,12 @@ public class UnknownEntityException extends RuntimeException {
     public String getMessage() {
         String message;
         if (args == null){
-            message = "Exception happened on " + entityName;
+            message = "Exception happened with " + entityName;
         } else {
             String params = Arrays.stream(args)
                     .map(s -> (String) s)
                     .collect(Collectors.joining(", "));
-            message = "Exception happened on " + entityName + " with args:\n" + params;
+            message = "Exception happened with " + entityName + " with args:\n" + params;
         }
         // todo
         // you should use entityName, args (if necessary)

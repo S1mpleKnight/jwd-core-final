@@ -14,7 +14,6 @@ public final class PropertyReaderUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyReaderUtil.class);
     private static final Properties PROPERTIES = new Properties();
-    private static PropertyReaderUtil readerUtilProperties;
 
     private PropertyReaderUtil() {
         loadProperties();
@@ -37,5 +36,17 @@ public final class PropertyReaderUtil {
         } catch (IOException e){
             LOGGER.error(e.getMessage());
         }
+    }
+
+    public static ApplicationProperties takeProperties(){
+        return new ApplicationProperties(
+                PROPERTIES.getProperty("inputRootDir"),
+                PROPERTIES.getProperty("outputRootDir"),
+                PROPERTIES.getProperty("crewFileName"),
+                PROPERTIES.getProperty("missionsFileName"),
+                PROPERTIES.getProperty("spaceshipsFileName"),
+                Integer.parseInt(PROPERTIES.getProperty("fileRefreshRate")),
+                PROPERTIES.getProperty("yyyy-MM-dd HH:mm:ss")
+        );
     }
 }

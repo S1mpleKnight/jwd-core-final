@@ -15,11 +15,13 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
     private Map<Role, Short> crew;
     private Long flightDistance;
     private Boolean isReadyForNextMissions;
+    private String name;
 
-    private SpaceshipCriteria(Map<Role, Short> crew, Long flightDistance, Boolean isReadyForNextMissions){
+    private SpaceshipCriteria(Map<Role, Short> crew, Long flightDistance, Boolean isReadyForNextMissions, String name){
         this.crew = crew;
         this.flightDistance = flightDistance;
         this.isReadyForNextMissions = isReadyForNextMissions;
+        this.name = name;
     }
 
     public Map<Role, Short> getCrew(){
@@ -34,19 +36,8 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
         return isReadyForNextMissions;
     }
 
-    @Override
-    public boolean equals(Object o){
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SpaceshipCriteria that = (SpaceshipCriteria) o;
-        return Objects.equals(crew, that.crew) &&
-                Objects.equals(flightDistance, that.flightDistance) &&
-                Objects.equals(isReadyForNextMissions, that.isReadyForNextMissions);
-    }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(crew, flightDistance, isReadyForNextMissions);
+    public String getName(){
+        return name;
     }
 
     @Override
@@ -55,7 +46,24 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
                 "crew=" + crew +
                 ", flightDistance=" + flightDistance +
                 ", isReadyForNextMissions=" + isReadyForNextMissions +
+                ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SpaceshipCriteria that = (SpaceshipCriteria) o;
+        return Objects.equals(crew, that.crew) &&
+                Objects.equals(flightDistance, that.flightDistance) &&
+                Objects.equals(isReadyForNextMissions, that.isReadyForNextMissions) &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(crew, flightDistance, isReadyForNextMissions, name);
     }
 
     public static SpaceshipCriteriaBuilder builder(){
@@ -63,9 +71,11 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
     }
 
     public static class SpaceshipCriteriaBuilder{
+
         private Map<Role, Short> crew;
         private Long flightDistance;
         private Boolean isReadyForNextMissions;
+        private String name;
 
         public SpaceshipCriteriaBuilder crew(Map<Role, Short> crew){
             this.crew = crew;
@@ -82,11 +92,17 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
             return this;
         }
 
+        public SpaceshipCriteriaBuilder name(String name){
+            this.name = name;
+            return this;
+        }
+
         public SpaceshipCriteria build(){
             return new SpaceshipCriteria(
                     this.crew,
                     this.flightDistance,
-                    this.isReadyForNextMissions
+                    this.isReadyForNextMissions,
+                    this.name
             );
         }
     }
