@@ -9,6 +9,11 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 // do the same for other entities
 public class CrewMemberFactory implements EntityFactory<CrewMember> {
 
+    private static CrewMemberFactory factory;
+
+    private CrewMemberFactory(){
+    }
+
     @Override
     public CrewMember create(Object... args) throws InvalidStateException{
         if (args == null){
@@ -21,5 +26,12 @@ public class CrewMemberFactory implements EntityFactory<CrewMember> {
             Rank rank = Rank.resolveRankById(Long.parseLong((String) args[2]));
             return new CrewMember(name, role, rank);
         }
+    }
+
+    public static CrewMemberFactory getFactory(){
+        if (factory == null){
+            factory = new CrewMemberFactory();
+        }
+        return factory;
     }
 }

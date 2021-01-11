@@ -71,7 +71,7 @@ public class NasaContext implements ApplicationContext {
     }
 
     private void populateCrewMembersList(String path) throws IOException, InvalidStateException{
-        EntityFactory<CrewMember> factory = new CrewMemberFactory();
+        EntityFactory<CrewMember> factory = CrewMemberFactory.getFactory();
         List<String> crewData = FilesInfoManipulator.readFile(path)
                 .stream()
                 .filter(s -> (s.charAt(0) != '#'))
@@ -84,7 +84,7 @@ public class NasaContext implements ApplicationContext {
     }
 
     private void populateSpaceshipsList(String path) throws IOException, InvalidStateException{
-        EntityFactory<Spaceship> factory = new SpaceshipFactory();
+        EntityFactory<Spaceship> factory = SpaceshipFactory.getFactory();
         List<String> spaceshipData = FilesInfoManipulator.readFile(path)
                 .stream()
                 .filter(s -> (s.charAt(0) != '#'))
@@ -96,7 +96,7 @@ public class NasaContext implements ApplicationContext {
     }
 
     private void populateMissionsList(String path) throws IOException, InvalidStateException{
-        EntityFactory<FlightMission> factory = new FlightMissionFactory();
+        EntityFactory<FlightMission> factory = FlightMissionFactory.getFactory();
         List<String> spaceshipData = FilesInfoManipulator.readFile(path)
                 .stream()
                 .filter(s -> (s.charAt(0) != '#'))

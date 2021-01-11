@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FlightMissionFactory implements EntityFactory<FlightMission>{
+
+    private static FlightMissionFactory factory;
+
+    private FlightMissionFactory(){
+    }
+
     @Override
     public FlightMission create(Object... args) throws InvalidStateException{
         if (args == null){
@@ -30,5 +36,12 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
         List<String> ymd = Arrays.stream(str.substring(0, 10).split("-")).collect(Collectors.toList());
         return LocalDate.of(Integer.parseInt(ymd.get(0)),
                 Integer.parseInt(ymd.get(1)), Integer.parseInt(ymd.get(2)));
+    }
+
+    public static FlightMissionFactory getFactory(){
+        if (factory == null){
+            factory = new FlightMissionFactory();
+        }
+        return factory;
     }
 }
