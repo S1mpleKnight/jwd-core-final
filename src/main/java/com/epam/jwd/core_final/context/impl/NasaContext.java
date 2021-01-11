@@ -29,11 +29,15 @@ public class NasaContext implements ApplicationContext {
 
     private static final ApplicationProperties APPLICATION_PROPERTIES = PropertyReaderUtil.takeProperties();
     private static final Logger LOGGER = LoggerFactory.getLogger(NasaContext.class);
+    private static NasaContext context;
 
     // no getters/setters for them
     private Collection<CrewMember> crewMembers = new ArrayList<>();
     private Collection<Spaceship> spaceships = new ArrayList<>();
     private Collection<FlightMission> flightMissions = new ArrayList<>();
+
+    private NasaContext(){
+    }
 
     @Override
     public <T extends BaseEntity> Collection<T> retrieveBaseEntityList(Class<T> tClass) throws UnknownEntityException{
@@ -64,6 +68,13 @@ public class NasaContext implements ApplicationContext {
             LOGGER.error(e.getLocalizedMessage());
             throw new InvalidStateException("TODO");
         }
+    }
+
+    public static NasaContext getContext(){
+        if (context == null){
+            context = new NasaContext();
+        }
+        return context;
     }
 
     public static ApplicationProperties getApplicationProperties(){
