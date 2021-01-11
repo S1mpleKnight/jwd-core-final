@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
+import com.epam.jwd.core_final.exception.ArgumentNotFoundException;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.exception.UnknownEntityException;
 import com.epam.jwd.core_final.factory.EntityFactory;
@@ -64,7 +65,7 @@ public class NasaContext implements ApplicationContext {
             populateCrewMembersList(APPLICATION_PROPERTIES.getCrewFileName());
             populateSpaceshipsList(APPLICATION_PROPERTIES.getSpaceshipsFileName());
             populateMissionsList(APPLICATION_PROPERTIES.getMissionsFileName());
-        } catch (IOException e){
+        } catch (IOException | ArgumentNotFoundException e){
             LOGGER.error(e.getLocalizedMessage());
             throw new InvalidStateException("TODO");
         }
@@ -81,7 +82,7 @@ public class NasaContext implements ApplicationContext {
         return APPLICATION_PROPERTIES;
     }
 
-    private void populateCrewMembersList(String path) throws IOException, InvalidStateException{
+    private void populateCrewMembersList(String path) throws IOException, InvalidStateException, ArgumentNotFoundException{
         EntityFactory<CrewMember> factory = CrewMemberFactory.getFactory();
         List<String> crewData = FilesInfoManipulator.readFile(path)
                 .stream()
@@ -94,7 +95,7 @@ public class NasaContext implements ApplicationContext {
         }
     }
 
-    private void populateSpaceshipsList(String path) throws IOException, InvalidStateException{
+    private void populateSpaceshipsList(String path) throws IOException, InvalidStateException, ArgumentNotFoundException{
         EntityFactory<Spaceship> factory = SpaceshipFactory.getFactory();
         List<String> spaceshipData = FilesInfoManipulator.readFile(path)
                 .stream()
@@ -106,7 +107,7 @@ public class NasaContext implements ApplicationContext {
         }
     }
 
-    private void populateMissionsList(String path) throws IOException, InvalidStateException{
+    private void populateMissionsList(String path) throws IOException, InvalidStateException, ArgumentNotFoundException{
         EntityFactory<FlightMission> factory = FlightMissionFactory.getFactory();
         List<String> spaceshipData = FilesInfoManipulator.readFile(path)
                 .stream()
