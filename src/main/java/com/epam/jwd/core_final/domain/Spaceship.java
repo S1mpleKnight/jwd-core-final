@@ -9,20 +9,28 @@ import java.util.Map;
  */
 public class Spaceship extends AbstractBaseEntity {
 
-    private Map<Role, Short> crew;
+    private final Long id;
+    private final Map<Role, Short> crew;
     private Long flightDistance;
     private Boolean isReadyForNextMissions;
     private final String name;
 
     public Spaceship(Map<Role, Short> crew, Long flightDistance, String name){
+        this.id = this.getId();
         this.crew = crew;
         this.flightDistance = flightDistance;
         this.isReadyForNextMissions = true;
         this.name = name;
     }
 
-    public void setCrew(Map<Role, Short> crew){
-        this.crew = crew;
+    @Override
+    public Long getId(){
+        return id;
+    }
+
+    @Override
+    public String getName(){
+        return name;
     }
 
     public void setFlightDistance(Long flightDistance){

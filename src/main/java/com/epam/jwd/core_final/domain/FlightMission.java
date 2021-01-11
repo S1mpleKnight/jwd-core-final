@@ -19,24 +19,29 @@ public class FlightMission extends AbstractBaseEntity {
     private final Long id;
     private final String name;
     private final LocalDate startDate;
-    private LocalDate endDate;
+    private final LocalDate endDate;
     private final Long distance;
     private Spaceship spaceship;
     private List<CrewMember> crew;
     private MissionResult missionResult;
 
-    public FlightMission(String name, LocalDate startDate, Long distance,
-                         Spaceship spaceship, List<CrewMember> crew){
+    public FlightMission(String name, LocalDate startDate, LocalDate endDate,
+                         Long distance){
         this.name = name;
         this.startDate = startDate;
+        this.endDate = endDate;
         this.distance = distance;
-        this.spaceship = spaceship;
-        this.crew = crew;
         this.id = this.getId();
     }
 
-    public void setEndDate(LocalDate endDate){
-        this.endDate = endDate;
+    @Override
+    public String getName(){
+        return name;
+    }
+
+    @Override
+    public Long getId(){
+        return id;
     }
 
     public void setSpaceship(Spaceship spaceship){
@@ -73,10 +78,5 @@ public class FlightMission extends AbstractBaseEntity {
 
     public MissionResult getMissionResult(){
         return missionResult;
-    }
-
-    @Override
-    public String getName(){
-        return name;
     }
 }

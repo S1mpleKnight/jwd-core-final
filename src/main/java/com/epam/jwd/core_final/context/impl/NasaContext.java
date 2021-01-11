@@ -10,6 +10,7 @@ import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.exception.UnknownEntityException;
 import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
+import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.util.FilesInfoManipulator;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
@@ -58,6 +59,7 @@ public class NasaContext implements ApplicationContext {
         try{
             populateCrewMembersList(APPLICATION_PROPERTIES.getCrewFileName());
             populateSpaceshipsList(APPLICATION_PROPERTIES.getSpaceshipsFileName());
+            populateMissionsList(APPLICATION_PROPERTIES.getMissionsFileName());
         } catch (IOException e){
             LOGGER.error(e.getLocalizedMessage());
             throw new InvalidStateException("TODO");
@@ -90,6 +92,18 @@ public class NasaContext implements ApplicationContext {
         for (String spaceshipDatum : spaceshipData){
             List<String> params = FilesInfoManipulator.separateString(spaceshipDatum, ";");
             spaceships.add(factory.create(params.toArray()));
+        }
+    }
+
+    private void populateMissionsList(String path) throws IOException, InvalidStateException{
+        EntityFactory<FlightMission> factory = new FlightMissionFactory();
+        List<String> spaceshipData = FilesInfoManipulator.readFile(path)
+                .stream()
+                .filter(s -> (s.charAt(0) != '#'))
+                .collect(Collectors.toList());
+        for (String spaceshipDatum : spaceshipData){
+            List<String> params = FilesInfoManipulator.separateString(spaceshipDatum, ";");
+            flightMissions.add(factory.create(params.toArray()));
         }
     }
 }

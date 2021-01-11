@@ -15,6 +15,24 @@ public class CrewMember extends AbstractBaseEntity {
     private final Rank rank;
     private Boolean isReadyForNextMissions;
 
+    public CrewMember(String name, Role role, Rank rank){
+        this.name = name;
+        this.role = role;
+        this.rank = rank;
+        this.id = this.getId();
+        this.isReadyForNextMissions = true;
+    }
+
+    @Override
+    public Long getId(){
+        return id;
+    }
+
+    @Override
+    public String getName(){
+        return name;
+    }
+
     public Role getRole(){
         return role;
     }
@@ -29,13 +47,5 @@ public class CrewMember extends AbstractBaseEntity {
 
     public void setReadyForNextMissions(Boolean readyForNextMissions){
         isReadyForNextMissions = readyForNextMissions;
-    }
-
-    public CrewMember(String name, Role role, Rank rank){
-        this.name = name;
-        this.role = role;
-        this.rank = rank;
-        this.id = this.getId();
-        this.isReadyForNextMissions = true;
     }
 }
