@@ -10,12 +10,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public final class PropertyReaderUtil {
+public final class PropertyReaderUtil{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertyReaderUtil.class);
     private static final Properties PROPERTIES = new Properties();
 
-    private PropertyReaderUtil() {
+    private PropertyReaderUtil(){
         loadProperties();
     }
 

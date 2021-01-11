@@ -15,6 +15,13 @@ public class SpaceshipFactory implements EntityFactory<Spaceship>{
     private SpaceshipFactory(){
     }
 
+    public static SpaceshipFactory getFactory(){
+        if (factory == null){
+            factory = new SpaceshipFactory();
+        }
+        return factory;
+    }
+
     @Override
     public Spaceship create(Object... args) throws InvalidStateException{
         if (args == null){
@@ -38,12 +45,5 @@ public class SpaceshipFactory implements EntityFactory<Spaceship>{
                     Short.parseShort(unit.substring(2)));
         }
         return neededMap;
-    }
-
-    public static SpaceshipFactory getFactory(){
-        if(factory == null){
-            factory = new SpaceshipFactory();
-        }
-        return factory;
     }
 }

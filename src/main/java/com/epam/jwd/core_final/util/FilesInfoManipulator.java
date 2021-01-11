@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FilesInfoManipulator{
+
     public static List<String> readFile(String path) throws IOException{
         return Files.lines(Path.of(path)).collect(Collectors.toList());
     }

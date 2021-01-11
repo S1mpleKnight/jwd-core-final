@@ -14,7 +14,7 @@ import java.util.List;
  * assignedCrew {@link java.util.List<CrewMember>} - list of missions members based on ship capacity - not defined by default
  * missionResult {@link MissionResult}
  */
-public class FlightMission extends AbstractBaseEntity {
+public class FlightMission extends AbstractBaseEntity{
 
     private final Long id;
     private final String name;
@@ -35,25 +35,13 @@ public class FlightMission extends AbstractBaseEntity {
     }
 
     @Override
-    public String getName(){
-        return name;
-    }
-
-    @Override
     public Long getId(){
         return id;
     }
 
-    public void setSpaceship(Spaceship spaceship){
-        this.spaceship = spaceship;
-    }
-
-    public void setCrew(List<CrewMember> crew){
-        this.crew = crew;
-    }
-
-    public void setMissionResult(MissionResult missionResult){
-        this.missionResult = missionResult;
+    @Override
+    public String getName(){
+        return name;
     }
 
     public LocalDate getStartDate(){
@@ -72,11 +60,23 @@ public class FlightMission extends AbstractBaseEntity {
         return spaceship;
     }
 
+    public void setSpaceship(Spaceship spaceship){
+        this.spaceship = spaceship;
+    }
+
     public List<CrewMember> getCrew(){
         return crew;
     }
 
+    public void setCrew(List<CrewMember> crew){
+        this.crew = crew;
+    }
+
     public MissionResult getMissionResult(){
         return missionResult;
+    }
+
+    public void setMissionResult(MissionResult missionResult){
+        this.missionResult = missionResult;
     }
 }

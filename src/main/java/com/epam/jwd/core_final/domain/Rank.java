@@ -4,7 +4,7 @@ import com.epam.jwd.core_final.exception.UnknownEntityException;
 
 import java.util.Arrays;
 
-public enum Rank implements BaseEntity {
+public enum Rank implements BaseEntity{
     TRAINEE(1L),
     SECOND_OFFICER(2L),
     FIRST_OFFICER(3L),
@@ -12,21 +12,8 @@ public enum Rank implements BaseEntity {
 
     private final Long id;
 
-    Rank(Long id) {
+    Rank(Long id){
         this.id = id;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * todo via java.lang.enum methods!
-     */
-    @Override
-    public String getName() {
-        return name();
     }
 
     /**
@@ -34,10 +21,23 @@ public enum Rank implements BaseEntity {
      *
      * @throws UnknownEntityException if such id does not exist
      */
-    public static Rank resolveRankById(Long id) {
+    public static Rank resolveRankById(Long id){
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new UnknownEntityException("Rank", new Object[]{"id = " + id}));
+    }
+
+    @Override
+    public Long getId(){
+        return id;
+    }
+
+    /**
+     * todo via java.lang.enum methods!
+     */
+    @Override
+    public String getName(){
+        return name();
     }
 }

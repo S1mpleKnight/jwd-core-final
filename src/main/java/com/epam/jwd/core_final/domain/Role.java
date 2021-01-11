@@ -1,9 +1,10 @@
 package com.epam.jwd.core_final.domain;
 
 import com.epam.jwd.core_final.exception.UnknownEntityException;
+
 import java.util.Arrays;
 
-public enum Role implements BaseEntity {
+public enum Role implements BaseEntity{
     MISSION_SPECIALIST(1L),
     FLIGHT_ENGINEER(2L),
     PILOT(3L),
@@ -11,12 +12,24 @@ public enum Role implements BaseEntity {
 
     private final Long id;
 
-    Role(Long id) {
+    Role(Long id){
         this.id = id;
     }
 
+    /**
+     * todo via java.lang.enum methods!
+     *
+     * @throws UnknownEntityException if such id does not exist
+     */
+    public static Role resolveRoleById(Long id){
+        return Arrays.stream(Role.values())
+                .filter(rank -> rank.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new UnknownEntityException("Role", new Object[]{"id = " + id}));
+    }
+
     @Override
-    public Long getId() {
+    public Long getId(){
         return id;
     }
 
@@ -24,18 +37,7 @@ public enum Role implements BaseEntity {
      * todo via java.lang.enum methods!
      */
     @Override
-    public String getName() {
+    public String getName(){
         return name();
-    }
-
-    /**
-     * todo via java.lang.enum methods!
-     * @throws UnknownEntityException if such id does not exist
-     */
-    public static Role resolveRoleById(Long id) {
-        return Arrays.stream(Role.values())
-                .filter(rank -> rank.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new UnknownEntityException("Role", new Object[]{"id = " + id}));
     }
 }

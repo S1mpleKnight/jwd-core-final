@@ -26,18 +26,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 // todo
-public class NasaContext implements ApplicationContext {
+public class NasaContext implements ApplicationContext{
 
     private static final ApplicationProperties APPLICATION_PROPERTIES = PropertyReaderUtil.takeProperties();
     private static final Logger LOGGER = LoggerFactory.getLogger(NasaContext.class);
     private static NasaContext context;
 
     // no getters/setters for them
-    private Collection<CrewMember> crewMembers = new ArrayList<>();
-    private Collection<Spaceship> spaceships = new ArrayList<>();
-    private Collection<FlightMission> flightMissions = new ArrayList<>();
+    private final Collection<CrewMember> crewMembers = new ArrayList<>();
+    private final Collection<Spaceship> spaceships = new ArrayList<>();
+    private final Collection<FlightMission> flightMissions = new ArrayList<>();
 
     private NasaContext(){
+    }
+
+    public static NasaContext getContext(){
+        if (context == null){
+            context = new NasaContext();
+        }
+        return context;
+    }
+
+    public static ApplicationProperties getApplicationProperties(){
+        return APPLICATION_PROPERTIES;
     }
 
     @Override
@@ -50,17 +61,18 @@ public class NasaContext implements ApplicationContext {
         } else if (tClass == FlightMission.class){
             neededList = (Collection<T>) flightMissions;
         } else {
-                throw new UnknownEntityException(tClass.getCanonicalName());
+            throw new UnknownEntityException(tClass.getCanonicalName());
         }
         return neededList;
     }
 
     /**
      * You have to read input files, populate collections
+     *
      * @throws InvalidStateException
      */
     @Override
-    public void init() throws InvalidStateException {
+    public void init() throws InvalidStateException{
         try{
             populateCrewMembersList(APPLICATION_PROPERTIES.getCrewFileName());
             populateSpaceshipsList(APPLICATION_PROPERTIES.getSpaceshipsFileName());
@@ -69,17 +81,6 @@ public class NasaContext implements ApplicationContext {
             LOGGER.error(e.getLocalizedMessage());
             throw new InvalidStateException("TODO");
         }
-    }
-
-    public static NasaContext getContext(){
-        if (context == null){
-            context = new NasaContext();
-        }
-        return context;
-    }
-
-    public static ApplicationProperties getApplicationProperties(){
-        return APPLICATION_PROPERTIES;
     }
 
     private void populateCrewMembersList(String path) throws IOException, InvalidStateException, ArgumentNotFoundException{

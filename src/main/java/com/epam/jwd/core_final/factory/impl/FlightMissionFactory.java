@@ -5,10 +5,11 @@ import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.MissionResult;
 import com.epam.jwd.core_final.domain.Role;
-import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.ArgumentNotFoundException;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.factory.EntityFactory;
+import com.epam.jwd.core_final.service.impl.SimpleCrewService;
+import com.epam.jwd.core_final.service.impl.SimpleSpaceshipService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,6 +24,13 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
     private FlightMissionFactory(){
     }
 
+    public static FlightMissionFactory getFactory(){
+        if (factory == null){
+            factory = new FlightMissionFactory();
+        }
+        return factory;
+    }
+
     @Override
     public FlightMission create(Object... args) throws InvalidStateException, ArgumentNotFoundException{
         if (args == null){
@@ -34,60 +42,12 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
         }
     }
 
-    public static FlightMissionFactory getFactory(){
-        if (factory == null){
-            factory = new FlightMissionFactory();
-        }
-        return factory;
-    }
-
     private FlightMission formingMission(Object... args) throws ArgumentNotFoundException, InvalidStateException{
         FlightMission initialized = initMission(args);
-        assignSpaceship(initialized);
+        SimpleSpaceshipService.getSpaceshipService().assignSpaceshipOnMission(initialized);
         assignCrew(initialized);
-        assignMissionResult(initialized);
+        MissionResult.assignMissionResult(initialized);
         return initialized;
-    }
-
-    private void assignMissionResult(FlightMission mission) throws InvalidStateException{
-        if (mission.getEndDate().isAfter(LocalDate.now())
-                || mission.getStartDate().isBefore(LocalDate.now())){
-            mission.setMissionResult(MissionResult.IN_PROGRESS);
-        } else if (mission.getStartDate().isAfter(LocalDate.now())){
-            mission.setMissionResult(MissionResult.PLANNED);
-        } else {
-            int factor = (int) Math.floor(Math.random() * 3);
-            mission.setMissionResult(missionResultChanges(factor, mission));
-        }
-    }
-
-    private MissionResult missionResultChanges(int factor, FlightMission mission) throws InvalidStateException{
-        switch (factor){
-            case 0:
-                mission.getSpaceship().setNotOnMission(true);
-                for (CrewMember member: mission.getCrew()){
-                    member.setNotOnMission(true);
-                }
-                return MissionResult.CANCELLED;
-            case 1:
-                mission.getSpaceship().setNotOnMission(true);
-                mission.getSpaceship().setFlightDistance(mission.getSpaceship().getFlightDistance()
-                        + mission.getDistance());
-                for (CrewMember member: mission.getCrew()){
-                    member.setNotOnMission(true);
-                }
-                return MissionResult.COMPLETED;
-            case 2:
-                mission.getSpaceship().setNotOnMission(true);
-                mission.getSpaceship().setReadyForNextMissions(false);
-                for (CrewMember member: mission.getCrew()){
-                    member.setNotOnMission(true);
-                    member.setReadyForNextMissions(false);
-                }
-                return MissionResult.FAILED;
-            default:
-                throw new InvalidStateException("Wrong argument in switch");
-        }
     }
 
     private void assignCrew(FlightMission mission){
@@ -96,8 +56,8 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
             Role role = Role.resolveRoleById((long) i);
             crew.addAll(searchMembersWithParams(role, mission.getSpaceship().getCrew().get(role)));
         }
-        for (CrewMember member: crew){
-            member.setNotOnMission(false);
+        for (CrewMember member : crew){
+            SimpleCrewService.getCrewService().assignCrewMemberOnMission(member);
         }
         mission.setCrew(crew);
     }
@@ -110,20 +70,6 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
                 .filter(crewMember -> crewMember.getRole().equals(role))
                 .limit(amount)
                 .collect(Collectors.toList());
-    }
-
-    private void assignSpaceship(FlightMission mission) throws ArgumentNotFoundException{
-        Spaceship spaceship = searchSpaceship(mission);
-        spaceship.setNotOnMission(false);
-        mission.setSpaceship(spaceship);
-    }
-
-    private Spaceship searchSpaceship(FlightMission mission) throws ArgumentNotFoundException{
-        return NasaContext.getContext().retrieveBaseEntityList(Spaceship.class)
-                .stream()
-                .filter(Spaceship::getReadyForNextMissions)
-                .filter(Spaceship::getNotOnMission)
-                .findFirst().orElseThrow(ArgumentNotFoundException::new);
     }
 
     private FlightMission initMission(Object... args){

@@ -9,14 +9,14 @@ import java.util.Objects;
 /**
  * Should be a builder for {@link com.epam.jwd.core_final.domain.CrewMember} fields
  */
-public class CrewMemberCriteria extends Criteria<CrewMember> {
+public class CrewMemberCriteria extends Criteria<CrewMember>{
 
     private final Long id;
     private final String name;
     private final Role role;
     private final Rank rank;
-    private Boolean notOnMission;
     private final Boolean isReadyForNextMissions;
+    private final Boolean notOnMission;
 
     private CrewMemberCriteria(Long id, String name, Role role, Rank rank,
                                Boolean onMission, Boolean isReadyForNextMissions){
@@ -26,6 +26,10 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
         this.rank = rank;
         this.notOnMission = onMission;
         this.isReadyForNextMissions = isReadyForNextMissions;
+    }
+
+    public static CrewMemberCriteriaBuilder builder(){
+        return new CrewMemberCriteriaBuilder();
     }
 
     public Long getId(){
@@ -53,15 +57,8 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
     }
 
     @Override
-    public String toString(){
-        return "CrewMemberCriteria{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", role=" + role +
-                ", rank=" + rank +
-                ", onMission=" + notOnMission +
-                ", isReadyForNextMissions=" + isReadyForNextMissions +
-                '}';
+    public int hashCode(){
+        return Objects.hash(id, name, role, rank, notOnMission, isReadyForNextMissions);
     }
 
     @Override
@@ -78,12 +75,15 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(id, name, role, rank, notOnMission, isReadyForNextMissions);
-    }
-
-    public static CrewMemberCriteriaBuilder builder(){
-        return new CrewMemberCriteriaBuilder();
+    public String toString(){
+        return "CrewMemberCriteria{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                ", rank=" + rank +
+                ", onMission=" + notOnMission +
+                ", isReadyForNextMissions=" + isReadyForNextMissions +
+                '}';
     }
 
     public static class CrewMemberCriteriaBuilder{

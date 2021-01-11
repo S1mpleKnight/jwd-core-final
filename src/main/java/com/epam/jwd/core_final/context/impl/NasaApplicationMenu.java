@@ -10,6 +10,13 @@ public class NasaApplicationMenu implements ApplicationMenu{
     public NasaApplicationMenu(){
     }
 
+    public static NasaApplicationMenu getMenu(){
+        if (menu == null){
+            menu = new NasaApplicationMenu();
+        }
+        return menu;
+    }
+
     @Override
     public ApplicationContext getApplicationContext(){
         return NasaContext.getContext();
@@ -23,12 +30,5 @@ public class NasaApplicationMenu implements ApplicationMenu{
     @Override
     public Object handleUserInput(Object o){
         return null;
-    }
-
-    public static NasaApplicationMenu getMenu(){
-        if (menu == null){
-            menu = new NasaApplicationMenu();
-        }
-        return menu;
     }
 }

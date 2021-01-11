@@ -1,6 +1,5 @@
 package com.epam.jwd.core_final.criteria;
 
-import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 
@@ -10,35 +9,32 @@ import java.util.Objects;
 /**
  * Should be a builder for {@link Spaceship} fields
  */
-public class SpaceshipCriteria extends Criteria<Spaceship> {
+public class SpaceshipCriteria extends Criteria<Spaceship>{
 
-    private Long id;
-    private Map<Role, Short> crew;
-    private Long flightDistance;
-    private Boolean isReadyForNextMissions;
-    private Boolean onMission;
-    private String name;
+    private final Long id;
+    private final Map<Role, Short> crew;
+    private final Long flightDistance;
+    private final Boolean isReadyForNextMissions;
+    private final Boolean notOnMission;
+    private final String name;
 
     private SpaceshipCriteria(Long id, Map<Role, Short> crew, Long flightDistance,
-                              Boolean onMission, Boolean isReadyForNextMissions, String name){
+                              Boolean notOnMission, Boolean isReadyForNextMissions, String name){
         this.id = id;
         this.crew = crew;
         this.flightDistance = flightDistance;
-        this.onMission = onMission;
+        this.notOnMission = notOnMission;
         this.isReadyForNextMissions = isReadyForNextMissions;
         this.name = name;
     }
 
+    public static SpaceshipCriteriaBuilder builder(){
+        return new SpaceshipCriteriaBuilder();
+    }
+
     @Override
-    public String toString(){
-        return "SpaceshipCriteria{" +
-                "id=" + id +
-                ", crew=" + crew +
-                ", flightDistance=" + flightDistance +
-                ", isReadyForNextMissions=" + isReadyForNextMissions +
-                ", onMission=" + onMission +
-                ", name='" + name + '\'' +
-                '}';
+    public int hashCode(){
+        return Objects.hash(id, crew, flightDistance, isReadyForNextMissions, notOnMission, name);
     }
 
     @Override
@@ -50,17 +46,24 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
                 Objects.equals(crew, that.crew) &&
                 Objects.equals(flightDistance, that.flightDistance) &&
                 Objects.equals(isReadyForNextMissions, that.isReadyForNextMissions) &&
-                Objects.equals(onMission, that.onMission) &&
+                Objects.equals(notOnMission, that.notOnMission) &&
                 Objects.equals(name, that.name);
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(id, crew, flightDistance, isReadyForNextMissions, onMission, name);
+    public String toString(){
+        return "SpaceshipCriteria{" +
+                "id=" + id +
+                ", crew=" + crew +
+                ", flightDistance=" + flightDistance +
+                ", isReadyForNextMissions=" + isReadyForNextMissions +
+                ", onMission=" + notOnMission +
+                ", name='" + name + '\'' +
+                '}';
     }
 
-    public Boolean getOnMission(){
-        return onMission;
+    public Boolean getNotOnMission(){
+        return notOnMission;
     }
 
     public Long getId(){
@@ -83,16 +86,12 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
         return name;
     }
 
-    public static SpaceshipCriteriaBuilder builder(){
-        return new SpaceshipCriteriaBuilder();
-    }
-
     public static class SpaceshipCriteriaBuilder{
 
         private Long id;
         private Map<Role, Short> crew;
         private Long flightDistance;
-        private Boolean onMission;
+        private Boolean notOnMission;
         private Boolean isReadyForNextMissions;
         private String name;
 
@@ -101,8 +100,8 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
             return this;
         }
 
-        public SpaceshipCriteriaBuilder onMission(Boolean onMission){
-            this.onMission = onMission;
+        public SpaceshipCriteriaBuilder notOnMission(Boolean notOnMission){
+            this.notOnMission = notOnMission;
             return this;
         }
 
@@ -131,7 +130,7 @@ public class SpaceshipCriteria extends Criteria<Spaceship> {
                     this.id,
                     this.crew,
                     this.flightDistance,
-                    this.onMission,
+                    this.notOnMission,
                     this.isReadyForNextMissions,
                     this.name
             );
