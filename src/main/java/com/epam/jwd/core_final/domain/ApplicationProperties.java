@@ -1,5 +1,9 @@
 package com.epam.jwd.core_final.domain;
 
+import com.epam.jwd.core_final.util.PropertyReaderUtil;
+
+import java.io.File;
+
 /**
  * This class should be IMMUTABLE!
  * <p>
@@ -16,6 +20,8 @@ package com.epam.jwd.core_final.domain;
  */
 public class ApplicationProperties{
 
+    private static final String separator = File.separator;
+    private static ApplicationProperties applicationProperties;
     private final String inputRootDir;
     private final String outputRootDir;
     private final String crewFileName;
@@ -24,7 +30,7 @@ public class ApplicationProperties{
     private final Integer fileRefreshRate;
     private final String dateTimeFormat;
 
-    public ApplicationProperties(String inputRootDir, String outputRootDir, String crewFileName,
+    private ApplicationProperties(String inputRootDir, String outputRootDir, String crewFileName,
                                  String missionsFileName, String spaceshipsFileName, Integer fileRefreshRate,
                                  String dateTimeFormat){
         this.inputRootDir = inputRootDir;
@@ -36,12 +42,25 @@ public class ApplicationProperties{
         this.dateTimeFormat = dateTimeFormat;
     }
 
+    public static void populateProperties(){
+        applicationProperties = new ApplicationProperties(
+                PropertyReaderUtil.getPROPERTIES().getProperty("inputRootDir"),
+                PropertyReaderUtil.getPROPERTIES().getProperty("outputRootDir"),
+                PropertyReaderUtil.getPROPERTIES().getProperty("crewFileName"),
+                PropertyReaderUtil.getPROPERTIES().getProperty("missionsFileName"),
+                PropertyReaderUtil.getPROPERTIES().getProperty("spaceshipsFileName"),
+                Integer.parseInt(PropertyReaderUtil.getPROPERTIES().getProperty("fileRefreshRate")),
+                PropertyReaderUtil.getPROPERTIES().getProperty("dateTimeFormat")
+        );
+    }
+
     public String getInputRootDir(){
         return inputRootDir;
     }
 
     public String getSpaceshipsFileName(){
-        return spaceshipsFileName;
+        return "src" + separator + "main" + separator + "resources"
+                + separator + inputRootDir + separator + spaceshipsFileName;
     }
 
     public String getOutputRootDir(){
@@ -49,15 +68,21 @@ public class ApplicationProperties{
     }
 
     public String getCrewFileName(){
-        return crewFileName;
+        return "src" + separator + "main" + separator + "resources"
+                + separator + inputRootDir + separator + crewFileName;
     }
 
     public String getMissionsFileName(){
-        return missionsFileName;
+        return "src" + separator + "main" + separator + "resources"
+                + separator + inputRootDir + separator + missionsFileName;
     }
 
     public Integer getFileRefreshRate(){
         return fileRefreshRate;
+    }
+
+    public static ApplicationProperties getApplicationProperties(){
+        return applicationProperties;
     }
 
     public String getDateTimeFormat(){

@@ -65,7 +65,7 @@ public class SimpleSpaceshipService implements SpaceshipService{
 
     @Override
     public void assignSpaceshipOnMission(FlightMission mission) throws ArgumentNotFoundException{
-        Spaceship spaceship = searchSpaceship(mission);
+        Spaceship spaceship = searchSpaceship();
         spaceship.setNotOnMission(false);
         mission.setSpaceship(spaceship);
     }
@@ -83,7 +83,7 @@ public class SimpleSpaceshipService implements SpaceshipService{
         }
     }
 
-    private Spaceship searchSpaceship(FlightMission mission) throws ArgumentNotFoundException{
+    private Spaceship searchSpaceship() throws ArgumentNotFoundException{
         return NasaContext.getContext().retrieveBaseEntityList(Spaceship.class)
                 .stream()
                 .filter(Spaceship::getReadyForNextMissions)

@@ -16,7 +16,10 @@ public final class PropertyReaderUtil{
     private static final Properties PROPERTIES = new Properties();
 
     private PropertyReaderUtil(){
-        loadProperties();
+    }
+
+    public static Properties getPROPERTIES(){
+        return PROPERTIES;
     }
 
     /**
@@ -28,25 +31,14 @@ public final class PropertyReaderUtil{
      * values from property file
      */
     public static void loadProperties(){
-        final String propertiesFileName = "resource/application.properties";
+        final String propertiesFileName = "src/main/resources/application.properties";
         try (InputStream io = new FileInputStream(propertiesFileName)){
             PROPERTIES.load(io);
+            ApplicationProperties.populateProperties();
         } catch (FileNotFoundException e){
             LOGGER.error("Property file wasn't found");
         } catch (IOException e){
-            LOGGER.error(e.getMessage());
+            LOGGER.error("Load property exception");
         }
-    }
-
-    public static ApplicationProperties takeProperties(){
-        return new ApplicationProperties(
-                PROPERTIES.getProperty("inputRootDir"),
-                PROPERTIES.getProperty("outputRootDir"),
-                PROPERTIES.getProperty("crewFileName"),
-                PROPERTIES.getProperty("missionsFileName"),
-                PROPERTIES.getProperty("spaceshipsFileName"),
-                Integer.parseInt(PROPERTIES.getProperty("fileRefreshRate")),
-                PROPERTIES.getProperty("yyyy-MM-dd HH:mm:ss")
-        );
     }
 }

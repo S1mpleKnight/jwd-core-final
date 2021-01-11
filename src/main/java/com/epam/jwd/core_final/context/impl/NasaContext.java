@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 // todo
 public class NasaContext implements ApplicationContext{
 
-    private static final ApplicationProperties APPLICATION_PROPERTIES = PropertyReaderUtil.takeProperties();
     private static final Logger LOGGER = LoggerFactory.getLogger(NasaContext.class);
     private static NasaContext context;
 
@@ -45,10 +44,6 @@ public class NasaContext implements ApplicationContext{
             context = new NasaContext();
         }
         return context;
-    }
-
-    public static ApplicationProperties getApplicationProperties(){
-        return APPLICATION_PROPERTIES;
     }
 
     @Override
@@ -74,9 +69,9 @@ public class NasaContext implements ApplicationContext{
     @Override
     public void init() throws InvalidStateException{
         try{
-            populateCrewMembersList(APPLICATION_PROPERTIES.getCrewFileName());
-            populateSpaceshipsList(APPLICATION_PROPERTIES.getSpaceshipsFileName());
-            populateMissionsList(APPLICATION_PROPERTIES.getMissionsFileName());
+            populateCrewMembersList(ApplicationProperties.getApplicationProperties().getCrewFileName());
+            populateSpaceshipsList(ApplicationProperties.getApplicationProperties().getSpaceshipsFileName());
+            populateMissionsList(ApplicationProperties.getApplicationProperties().getMissionsFileName());
         } catch (IOException | ArgumentNotFoundException e){
             LOGGER.error(e.getLocalizedMessage());
             throw new InvalidStateException("TODO");
