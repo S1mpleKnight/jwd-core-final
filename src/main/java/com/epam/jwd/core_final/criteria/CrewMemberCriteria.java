@@ -15,13 +15,16 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
     private final String name;
     private final Role role;
     private final Rank rank;
+    private Boolean notOnMission;
     private final Boolean isReadyForNextMissions;
 
-    private CrewMemberCriteria(Long id, String name, Role role, Rank rank, Boolean isReadyForNextMissions){
+    private CrewMemberCriteria(Long id, String name, Role role, Rank rank,
+                               Boolean onMission, Boolean isReadyForNextMissions){
         this.id = id;
         this.name = name;
         this.role = role;
         this.rank = rank;
+        this.notOnMission = onMission;
         this.isReadyForNextMissions = isReadyForNextMissions;
     }
 
@@ -41,8 +44,24 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
         return rank;
     }
 
+    public Boolean getNotOnMission(){
+        return notOnMission;
+    }
+
     public Boolean getReadyForNextMissions(){
         return isReadyForNextMissions;
+    }
+
+    @Override
+    public String toString(){
+        return "CrewMemberCriteria{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                ", rank=" + rank +
+                ", onMission=" + notOnMission +
+                ", isReadyForNextMissions=" + isReadyForNextMissions +
+                '}';
     }
 
     @Override
@@ -54,23 +73,13 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
                 Objects.equals(name, that.name) &&
                 role == that.role &&
                 rank == that.rank &&
+                Objects.equals(notOnMission, that.notOnMission) &&
                 Objects.equals(isReadyForNextMissions, that.isReadyForNextMissions);
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(id, name, role, rank, isReadyForNextMissions);
-    }
-
-    @Override
-    public String toString(){
-        return "CrewMemberCriteria{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", role=" + role +
-                ", rank=" + rank +
-                ", isReadyForNextMissions=" + isReadyForNextMissions +
-                '}';
+        return Objects.hash(id, name, role, rank, notOnMission, isReadyForNextMissions);
     }
 
     public static CrewMemberCriteriaBuilder builder(){
@@ -83,10 +92,16 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
         private String name;
         private Role role;
         private Rank rank;
+        private Boolean notOnMission;
         private Boolean isReadyForNextMissions;
 
         public CrewMemberCriteriaBuilder id(Long id){
             this.id = id;
+            return this;
+        }
+
+        public CrewMemberCriteriaBuilder onMission(Boolean onMission){
+            this.notOnMission = onMission;
             return this;
         }
 
@@ -116,6 +131,7 @@ public class CrewMemberCriteria extends Criteria<CrewMember> {
                     this.name,
                     this.role,
                     this.rank,
+                    this.notOnMission,
                     this.isReadyForNextMissions
             );
         }

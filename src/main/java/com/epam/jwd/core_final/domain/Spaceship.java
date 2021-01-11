@@ -13,9 +13,11 @@ public class Spaceship extends AbstractBaseEntity {
     private final Map<Role, Short> crew;
     private Long flightDistance;
     private Boolean isReadyForNextMissions;
+    private Boolean notOnMission;
     private final String name;
 
     public Spaceship(Map<Role, Short> crew, Long flightDistance, String name){
+        this.notOnMission = true;
         this.id = this.getId();
         this.crew = crew;
         this.flightDistance = flightDistance;
@@ -31,6 +33,14 @@ public class Spaceship extends AbstractBaseEntity {
     @Override
     public String getName(){
         return name;
+    }
+
+    public Boolean getNotOnMission(){
+        return notOnMission;
+    }
+
+    public void setNotOnMission(Boolean notOnMission){
+        this.notOnMission = notOnMission;
     }
 
     public void setFlightDistance(Long flightDistance){

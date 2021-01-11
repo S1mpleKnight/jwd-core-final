@@ -13,9 +13,11 @@ public class CrewMember extends AbstractBaseEntity {
     private final String name;
     private final Role role;
     private final Rank rank;
+    private Boolean notOnMission;
     private Boolean isReadyForNextMissions;
 
     public CrewMember(String name, Role role, Rank rank){
+        this.notOnMission = true;
         this.name = name;
         this.role = role;
         this.rank = rank;
@@ -31,6 +33,14 @@ public class CrewMember extends AbstractBaseEntity {
     @Override
     public String getName(){
         return name;
+    }
+
+    public Boolean getNotOnMission(){
+        return notOnMission;
+    }
+
+    public void setNotOnMission(Boolean notOnMission){
+        this.notOnMission = notOnMission;
     }
 
     public Role getRole(){
