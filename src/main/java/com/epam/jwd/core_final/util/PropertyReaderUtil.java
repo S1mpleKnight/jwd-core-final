@@ -32,7 +32,7 @@ public final class PropertyReaderUtil {
         try (InputStream io = new FileInputStream(propertiesFileName)){
             PROPERTIES.load(io);
         } catch (FileNotFoundException e){
-            LOGGER.error("Property file was not found");
+            LOGGER.error("Property file wasn't found");
         } catch (IOException e){
             LOGGER.error(e.getMessage());
         }
