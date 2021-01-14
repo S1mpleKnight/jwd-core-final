@@ -1,12 +1,10 @@
 package com.epam.jwd.core_final.domain;
 
-import com.epam.jwd.core_final.context.intf.Application;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.logging.LogManager;
 
 /**
  * This class should be IMMUTABLE!
@@ -35,11 +33,11 @@ public class ApplicationProperties{
     private final Integer fileRefreshRate;
     private final String dateTimeFormat;
     private final String JSONFileDir;
-    private final String logFileDir;
+    private final String logDir;
 
     private ApplicationProperties(String inputRootDir, String outputRootDir, String crewFileName,
                                  String missionsFileName, String spaceshipsFileName, Integer fileRefreshRate,
-                                 String dateTimeFormat, String JSONFileDir, String logFileDir){
+                                 String dateTimeFormat, String JSONFileDir, String logDir){
         this.inputRootDir = inputRootDir;
         this.outputRootDir = outputRootDir;
         this.crewFileName = crewFileName;
@@ -47,7 +45,7 @@ public class ApplicationProperties{
         this.spaceshipsFileName = spaceshipsFileName;
         this.fileRefreshRate = fileRefreshRate;
         this.dateTimeFormat = dateTimeFormat;
-        this.logFileDir = logFileDir;
+        this.logDir = logDir;
         this.JSONFileDir = JSONFileDir;
     }
 
@@ -62,7 +60,7 @@ public class ApplicationProperties{
                 Integer.parseInt(PropertyReaderUtil.getPROPERTIES().getProperty("fileRefreshRate")),
                 PropertyReaderUtil.getPROPERTIES().getProperty("dateTimeFormat"),
                 PropertyReaderUtil.getPROPERTIES().getProperty("JSONFile"),
-                PropertyReaderUtil.getPROPERTIES().getProperty("logFile")
+                PropertyReaderUtil.getPROPERTIES().getProperty("logDir")
         );
     }
 
@@ -71,13 +69,13 @@ public class ApplicationProperties{
                 + separator + outputRootDir + separator + JSONFileDir;
     }
 
-    public String getLogFileDir(){
-        return "src" + separator + "main" + separator + "resources"
-                + separator + outputRootDir + separator + logFileDir;
+    public String getLogDir(){
+        return logDir;
     }
 
     public String getInputRootDir(){
-        return inputRootDir;
+        return "src" + separator + "main" + separator + "resources"
+                + separator + inputRootDir;
     }
 
     public String getSpaceshipsFileName(){
@@ -86,7 +84,8 @@ public class ApplicationProperties{
     }
 
     public String getOutputRootDir(){
-        return outputRootDir;
+        return "src" + separator + "main" + separator + "resources"
+                + separator + outputRootDir;
     }
 
     public String getCrewFileName(){
