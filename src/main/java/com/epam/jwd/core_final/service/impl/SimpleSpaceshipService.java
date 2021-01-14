@@ -6,7 +6,7 @@ import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.ArgumentNotFoundException;
-import com.epam.jwd.core_final.service.SpaceshipService;
+import com.epam.jwd.core_final.service.intf.SpaceshipService;
 
 import java.util.ArrayList;
 import java.util.List;

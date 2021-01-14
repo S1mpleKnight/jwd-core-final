@@ -1,4 +1,4 @@
-package com.epam.jwd.core_final.service;
+package com.epam.jwd.core_final.service.intf;
 
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;

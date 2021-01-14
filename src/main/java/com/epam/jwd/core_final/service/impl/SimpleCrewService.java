@@ -4,7 +4,7 @@ import com.epam.jwd.core_final.context.impl.NasaContext;
 import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.domain.CrewMember;
-import com.epam.jwd.core_final.service.CrewService;
+import com.epam.jwd.core_final.service.intf.CrewService;
 
 import java.util.ArrayList;
 import java.util.List;

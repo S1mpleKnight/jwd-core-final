@@ -4,7 +4,7 @@ import com.epam.jwd.core_final.context.impl.NasaContext;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.criteria.FlightMissionCriteria;
 import com.epam.jwd.core_final.domain.FlightMission;
-import com.epam.jwd.core_final.service.MissionService;
+import com.epam.jwd.core_final.service.intf.MissionService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.epam.jwd.core_final;
 
-import com.epam.jwd.core_final.context.Application;
-import com.epam.jwd.core_final.context.ApplicationMenu;
+import com.epam.jwd.core_final.context.intf.Application;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
 import org.slf4j.Logger;

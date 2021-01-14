@@ -1,4 +1,4 @@
-package com.epam.jwd.core_final.context;
+package com.epam.jwd.core_final.context.intf;
 
 // todo replace Object with your own types
 @FunctionalInterface

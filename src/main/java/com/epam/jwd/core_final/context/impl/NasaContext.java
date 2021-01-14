@@ -1,6 +1,6 @@
 package com.epam.jwd.core_final.context.impl;
 
-import com.epam.jwd.core_final.context.ApplicationContext;
+import com.epam.jwd.core_final.context.intf.ApplicationContext;
 import com.epam.jwd.core_final.domain.ApplicationProperties;
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
@@ -13,8 +13,9 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
+import com.epam.jwd.core_final.service.impl.SimpleCrewService;
 import com.epam.jwd.core_final.util.FilesInfoManipulator;
-import com.epam.jwd.core_final.util.PropertyReaderUtil;
+import com.epam.jwd.core_final.util.JSONOutPut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,6 +70,8 @@ public class NasaContext implements ApplicationContext{
     @Override
     public void init() throws InvalidStateException{
         try{
+            LOGGER.info("Initialization of lists");
+            JSONOutPut.init();
             populateCrewMembersList(ApplicationProperties.getApplicationProperties().getCrewFileName());
             populateSpaceshipsList(ApplicationProperties.getApplicationProperties().getSpaceshipsFileName());
             populateMissionsList(ApplicationProperties.getApplicationProperties().getMissionsFileName());

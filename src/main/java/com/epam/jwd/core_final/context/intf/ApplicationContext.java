@@ -1,4 +1,4 @@
-package com.epam.jwd.core_final.context;
+package com.epam.jwd.core_final.context.intf;
 
 import com.epam.jwd.core_final.domain.BaseEntity;
 import com.epam.jwd.core_final.exception.InvalidStateException;

@@ -1,7 +1,7 @@
 package com.epam.jwd.core_final.context.impl;
 
-import com.epam.jwd.core_final.context.ApplicationContext;
-import com.epam.jwd.core_final.context.ApplicationMenu;
+import com.epam.jwd.core_final.context.intf.ApplicationContext;
+import com.epam.jwd.core_final.context.intf.ApplicationMenu;
 
 public class NasaApplicationMenu implements ApplicationMenu{
 
