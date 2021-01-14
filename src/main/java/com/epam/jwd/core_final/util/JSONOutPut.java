@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Date;
 
 public class JSONOutPut{
 
@@ -27,7 +28,7 @@ public class JSONOutPut{
 
     public static void init(){
         try (Writer writer = new FileWriter(ApplicationProperties.getApplicationProperties().getJSONFileDir(), false)){
-            writer.flush();
+            writer.write(new Date().toString());
         } catch (IOException e){
             LOGGER.error("JSON format writing error " + e.getMessage());
         }

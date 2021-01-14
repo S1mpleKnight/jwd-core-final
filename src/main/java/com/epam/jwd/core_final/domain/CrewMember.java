@@ -16,12 +16,12 @@ public class CrewMember extends AbstractBaseEntity{
     private Boolean notOnMission;
     private Boolean isReadyForNextMissions;
 
-    public CrewMember(String name, Role role, Rank rank){
+    public CrewMember(String name, Role role, Rank rank, Long id){
         this.notOnMission = true;
         this.name = name;
         this.role = role;
         this.rank = rank;
-        this.id = this.getId();
+        this.id = id;
         this.isReadyForNextMissions = true;
     }
 

@@ -17,9 +17,9 @@ public class Spaceship extends AbstractBaseEntity{
     private Boolean isReadyForNextMissions;
     private Boolean notOnMission;
 
-    public Spaceship(Map<Role, Short> crew, Long flightDistance, String name){
+    public Spaceship(Map<Role, Short> crew, Long flightDistance, String name, Long id){
         this.notOnMission = true;
-        this.id = this.getId();
+        this.id = id;
         this.crew = crew;
         this.flightDistance = flightDistance;
         this.isReadyForNextMissions = true;

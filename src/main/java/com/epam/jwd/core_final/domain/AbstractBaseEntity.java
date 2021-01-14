@@ -10,9 +10,13 @@ public abstract class AbstractBaseEntity implements BaseEntity {
 
     private static Long idCounter = 0L;
 
+    public static Long reserveID(){
+        return  idCounter++;
+    }
+
     @Override
     public Long getId() {
-        return idCounter++;
+        return null;
     }
 
     @Override

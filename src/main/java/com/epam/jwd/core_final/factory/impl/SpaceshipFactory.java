@@ -1,5 +1,6 @@
 package com.epam.jwd.core_final.factory.impl;
 
+import com.epam.jwd.core_final.domain.AbstractBaseEntity;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.exception.InvalidStateException;
@@ -32,7 +33,7 @@ public class SpaceshipFactory implements EntityFactory<Spaceship>{
             String name = (String) args[0];
             Long flightDistance = Long.parseLong((String) args[1]);
             Map<Role, Short> crew = takeCrewFromString((String) args[2]);
-            return new Spaceship(crew, flightDistance, name);
+            return new Spaceship(crew, flightDistance, name, AbstractBaseEntity.reserveID());
         }
     }
 

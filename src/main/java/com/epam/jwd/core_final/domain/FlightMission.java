@@ -26,12 +26,12 @@ public class FlightMission extends AbstractBaseEntity{
     private MissionResult missionResult;
 
     public FlightMission(String name, LocalDate startDate, LocalDate endDate,
-                         Long distance){
+                         Long distance, Long id){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.distance = distance;
-        this.id = this.getId();
+        this.id = id;
     }
 
     @Override

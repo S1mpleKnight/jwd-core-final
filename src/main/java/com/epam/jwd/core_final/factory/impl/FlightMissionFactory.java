@@ -1,6 +1,7 @@
 package com.epam.jwd.core_final.factory.impl;
 
 import com.epam.jwd.core_final.context.impl.NasaContext;
+import com.epam.jwd.core_final.domain.AbstractBaseEntity;
 import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.MissionResult;
@@ -77,7 +78,7 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
         LocalDate startDate = takeDateFromString((String) args[1]);
         LocalDate endDate = takeDateFromString((String) args[2]);
         Long distance = Long.parseLong((String) args[3]);
-        return new FlightMission(name, startDate, endDate, distance);
+        return new FlightMission(name, startDate, endDate, distance, AbstractBaseEntity.reserveID());
     }
 
     private LocalDate takeDateFromString(String str){
