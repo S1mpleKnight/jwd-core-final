@@ -81,7 +81,7 @@ public class FlightMissionFactory implements EntityFactory<FlightMission>{
         return new FlightMission(name, startDate, endDate, distance, AbstractBaseEntity.reserveID());
     }
 
-    private LocalDate takeDateFromString(String str){
+    public LocalDate takeDateFromString(String str){
         List<String> ymd = Arrays.stream(str.substring(0, 10).split("-")).collect(Collectors.toList());
         return LocalDate.of(Integer.parseInt(ymd.get(0)),
                 Integer.parseInt(ymd.get(1)), Integer.parseInt(ymd.get(2)));

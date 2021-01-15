@@ -1,9 +1,7 @@
 package com.epam.jwd.core_final.context.impl.menu.search;
 
-import com.epam.jwd.core_final.criteria.CrewMemberCriteria;
 import com.epam.jwd.core_final.criteria.Criteria;
 import com.epam.jwd.core_final.criteria.SpaceshipCriteria;
-import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Spaceship;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
 import com.epam.jwd.core_final.service.impl.SimpleSpaceshipService;
@@ -14,9 +12,9 @@ import java.util.Scanner;
 
 public class SearchSpaceship{
 
-    private static SearchSpaceship searchSpaceship;
     private static final SimpleSpaceshipService SPACESHIP_SERVICE = SimpleSpaceshipService.getSpaceshipService();
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static SearchSpaceship searchSpaceship;
 
     private SearchSpaceship(){
     }
@@ -54,7 +52,8 @@ public class SearchSpaceship{
         }
         if (includeField("distance")){
             takeDistanceFromInput(builder);
-        }  if (includeField("crew")){
+        }
+        if (includeField("crew")){
             takeCrewFromInput(builder);
         }
         return builder.build();
