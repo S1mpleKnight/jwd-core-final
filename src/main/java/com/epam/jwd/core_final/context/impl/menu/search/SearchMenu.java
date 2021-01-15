@@ -50,13 +50,16 @@ public class SearchMenu{
             case "b":
                 break;
             case "s":
+                LOGGER.info("Search Spaceship");
 
                 break;
             case "f":
+                LOGGER.info("Search FlightMission");
 
                 break;
             case "c":
-
+                LOGGER.info("Search CrewMember");
+                SearchCrewMember.getSearchCrewMember().search();
                 break;
             default:
                 System.out.println("Wrong symbol.");

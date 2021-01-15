@@ -65,10 +65,6 @@ public class InsertFlightMission{
             return false;
         } else if ((args.get(2).length() != 10) || !args.get(2).matches("[[0-9]-]+")){
             return false;
-        } else if (!args.get(3).matches("[0-9]+")){
-            return false;
-        } else {
-            return true;
-        }
+        } else return args.get(3).matches("[0-9]+");
     }
 }

@@ -61,11 +61,7 @@ public class InsertCrewMember{
         } else if ((args.get(0).length() != 1) || (Integer.parseInt(args.get(0)) > 4)
                 || Integer.parseInt(args.get(0)) < 1){
             return false;
-        } else if ((args.get(2).length() != 1) || (Integer.parseInt(args.get(2)) > 4)
-                || Integer.parseInt(args.get(2)) < 1){
-            return false;
-        } else {
-            return true;
-        }
+        } else return (args.get(2).length() == 1) && (Integer.parseInt(args.get(2)) <= 4)
+                && Integer.parseInt(args.get(2)) >= 1;
     }
 }

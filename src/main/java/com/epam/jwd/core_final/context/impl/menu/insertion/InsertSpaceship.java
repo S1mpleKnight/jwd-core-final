@@ -1,13 +1,9 @@
 package com.epam.jwd.core_final.context.impl.menu.insertion;
 
 import com.epam.jwd.core_final.context.impl.NasaContext;
-import com.epam.jwd.core_final.domain.FlightMission;
 import com.epam.jwd.core_final.domain.Spaceship;
-import com.epam.jwd.core_final.exception.ArgumentNotFoundException;
 import com.epam.jwd.core_final.exception.InvalidStateException;
-import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
-import com.epam.jwd.core_final.service.impl.SimpleMissionService;
 import com.epam.jwd.core_final.service.impl.SimpleSpaceshipService;
 
 import java.util.ArrayList;
@@ -63,11 +59,7 @@ public class InsertSpaceship{
             return false;
         } else if (!args.get(1).matches("[0-9]+")){
             return false;
-        } else if (!args.get(2).matches("[0-9]:[0-9],[0-9]:[0-9],[0-9]:[0-9],[0-9]:[0-9]")
-                || args.get(2).length() != 15){
-            return false;
-        } else {
-            return true;
-        }
+        } else return args.get(2).matches("[0-9]:[0-9],[0-9]:[0-9],[0-9]:[0-9],[0-9]:[0-9]")
+                && args.get(2).length() == 15;
     }
 }
