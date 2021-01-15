@@ -13,7 +13,6 @@ import com.epam.jwd.core_final.factory.EntityFactory;
 import com.epam.jwd.core_final.factory.impl.CrewMemberFactory;
 import com.epam.jwd.core_final.factory.impl.FlightMissionFactory;
 import com.epam.jwd.core_final.factory.impl.SpaceshipFactory;
-import com.epam.jwd.core_final.service.impl.SimpleCrewService;
 import com.epam.jwd.core_final.util.FilesInfoManipulator;
 import com.epam.jwd.core_final.util.JSONOutPut;
 import org.slf4j.Logger;
@@ -121,9 +120,11 @@ public class NasaContext implements ApplicationContext{
     public void addCrewMember(CrewMember member){
         crewMembers.add(member);
     }
+
     public void addFlightMission(FlightMission mission){
         flightMissions.add(mission);
     }
+
     public void addSpaceship(Spaceship ship){
         spaceships.add(ship);
     }

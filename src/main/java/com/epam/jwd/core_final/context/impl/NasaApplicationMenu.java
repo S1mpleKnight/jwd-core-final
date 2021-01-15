@@ -73,14 +73,17 @@ public class NasaApplicationMenu implements ApplicationMenu{
                 return true;
             case "i":
                 InsertionMenu.getInsertionMenu().insertionMenu();
+                System.out.println("---------------------------------");
                 System.out.println("Main menu");
                 return true;
             case "s":
                 SearchMenu.getSearchMenu().searchMenu();
+                System.out.println("---------------------------------");
                 System.out.println("Main menu");
                 return true;
             case "u":
                 UpdateMenu.getUpdateMenu().updateMenu();
+                System.out.println("---------------------------------");
                 System.out.println("Main menu");
                 return true;
             case "e":

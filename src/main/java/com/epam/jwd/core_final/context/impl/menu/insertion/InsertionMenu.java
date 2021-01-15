@@ -24,7 +24,6 @@ public class InsertionMenu{
     }
 
     private void printAvailableOptions(){
-        System.out.println("---------------------------------");
         System.out.println("Insertion options: ");
         System.out.println("c -> Insert Crew Member");
         System.out.println("s -> Insert Spaceship");
@@ -33,6 +32,7 @@ public class InsertionMenu{
     }
 
     public void insertionMenu(){
+        System.out.println("---------------------------------");
         printAvailableOptions();
         System.out.print("Select option: ");
         String str = SCANNER.nextLine();

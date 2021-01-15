@@ -36,8 +36,8 @@ public class ApplicationProperties{
     private final String logDir;
 
     private ApplicationProperties(String inputRootDir, String outputRootDir, String crewFileName,
-                                 String missionsFileName, String spaceshipsFileName, Integer fileRefreshRate,
-                                 String dateTimeFormat, String JSONFileDir, String logDir){
+                                  String missionsFileName, String spaceshipsFileName, Integer fileRefreshRate,
+                                  String dateTimeFormat, String JSONFileDir, String logDir){
         this.inputRootDir = inputRootDir;
         this.outputRootDir = outputRootDir;
         this.crewFileName = crewFileName;
@@ -62,6 +62,10 @@ public class ApplicationProperties{
                 PropertyReaderUtil.getPROPERTIES().getProperty("JSONFile"),
                 PropertyReaderUtil.getPROPERTIES().getProperty("logDir")
         );
+    }
+
+    public static ApplicationProperties getApplicationProperties(){
+        return applicationProperties;
     }
 
     public String getJSONFileDir(){
@@ -100,10 +104,6 @@ public class ApplicationProperties{
 
     public Integer getFileRefreshRate(){
         return fileRefreshRate;
-    }
-
-    public static ApplicationProperties getApplicationProperties(){
-        return applicationProperties;
     }
 
     public String getDateTimeFormat(){

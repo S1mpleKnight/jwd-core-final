@@ -29,6 +29,7 @@ public class SearchMenu{
     }
 
     public void searchMenu(){
+        System.out.println("---------------------------------");
         printAvailableOptions();
         System.out.println("Select option: ");
         String str = SCANNER.nextLine();

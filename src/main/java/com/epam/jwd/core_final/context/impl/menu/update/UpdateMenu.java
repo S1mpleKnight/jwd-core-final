@@ -29,6 +29,7 @@ public class UpdateMenu{
     }
 
     public void updateMenu(){
+        System.out.println("---------------------------------");
         printAvailableOptions();
         System.out.println("Select option: ");
         String str = SCANNER.nextLine();
