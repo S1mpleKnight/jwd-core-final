@@ -30,7 +30,7 @@ public class SearchCrewMember{
 
     public void search(){
         System.out.println("---------------------------------");
-        System.out.println("Search params: ");
+        System.out.print("Search params: ");
         List<CrewMember> list = CREW_SERVICE.findAllCrewMembersByCriteria(takeCriteria());
         for (CrewMember member : list){
             JSONOutPut.output(member);

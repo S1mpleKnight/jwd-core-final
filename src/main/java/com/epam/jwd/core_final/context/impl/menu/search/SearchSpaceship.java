@@ -28,7 +28,7 @@ public class SearchSpaceship{
 
     public void search(){
         System.out.println("---------------------------------");
-        System.out.println("Search params: ");
+        System.out.print("Search params: ");
         List<Spaceship> list = SPACESHIP_SERVICE.findAllSpaceshipsByCriteria(takeCriteria());
         for (Spaceship ship : list){
             JSONOutPut.output(ship);

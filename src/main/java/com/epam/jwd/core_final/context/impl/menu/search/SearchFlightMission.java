@@ -34,7 +34,7 @@ public class SearchFlightMission{
 
     public void search(){
         System.out.println("---------------------------------");
-        System.out.println("Search params: ");
+        System.out.print("Search params: ");
         List<FlightMission> list = MISSION_SERVICE.findAllMissionsByCriteria(takeCriteria());
         for (FlightMission mission : list){
             JSONOutPut.output(mission);
