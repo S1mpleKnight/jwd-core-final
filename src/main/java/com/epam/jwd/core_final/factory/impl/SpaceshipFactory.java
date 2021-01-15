@@ -37,7 +37,7 @@ public class SpaceshipFactory implements EntityFactory<Spaceship>{
         }
     }
 
-    private Map<Role, Short> takeCrewFromString(String str){
+    public Map<Role, Short> takeCrewFromString(String str){
         String prepareStr = str.substring(1, str.length() - 1);
         String[] units = prepareStr.split(",");
         Map<Role, Short> neededMap = new HashMap<>();
