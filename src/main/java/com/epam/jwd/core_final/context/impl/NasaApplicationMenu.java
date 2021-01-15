@@ -1,6 +1,5 @@
-package com.epam.jwd.core_final.context.impl.menu;
+package com.epam.jwd.core_final.context.impl;
 
-import com.epam.jwd.core_final.context.impl.NasaContext;
 import com.epam.jwd.core_final.context.intf.ApplicationContext;
 import com.epam.jwd.core_final.context.intf.ApplicationMenu;
 import org.slf4j.Logger;
@@ -57,7 +56,7 @@ public class NasaApplicationMenu implements ApplicationMenu{
         String str;
         boolean flag;
         do{
-            System.out.print("Enter the symbol: ");
+            System.out.print("Select option: ");
             str = SCANNER.nextLine();
             flag = mainSwitch(str);
         }while (flag);
