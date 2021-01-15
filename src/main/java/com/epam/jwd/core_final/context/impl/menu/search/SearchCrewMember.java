@@ -6,6 +6,7 @@ import com.epam.jwd.core_final.domain.CrewMember;
 import com.epam.jwd.core_final.domain.Rank;
 import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.service.impl.SimpleCrewService;
+import com.epam.jwd.core_final.util.JSONOutPut;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class SearchCrewMember{
         System.out.println("Search params: ");
         List<CrewMember> list = CREW_SERVICE.findAllCrewMembersByCriteria(takeCriteria());
         for (CrewMember member : list){
+            JSONOutPut.output(member);
             System.out.println(member.getName() + " id: " + member.getId());
         }
     }
