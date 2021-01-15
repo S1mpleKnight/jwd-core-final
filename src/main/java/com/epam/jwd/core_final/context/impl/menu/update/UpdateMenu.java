@@ -23,8 +23,8 @@ public class UpdateMenu{
     private void printAvailableOptions(){
         System.out.println("Update options: ");
         System.out.println("c -> Update Crew Member");
-        System.out.println("s -> Update Spaceship");
-        System.out.println("f -> Update Flight Mission");
+      //  System.out.println("s -> Update Spaceship");
+       // System.out.println("f -> Update Flight Mission");
         System.out.println("b -> Back");
     }
 
@@ -50,12 +50,12 @@ public class UpdateMenu{
         switch (result){
             case "b":
                 break;
-            case "s":
-
-                break;
-            case "f":
-
-                break;
+//            case "s":
+//
+//                break;
+//            case "f":
+//
+//                break;
             case "c":
                 LOGGER.info("Update CrewMember");
                 UpdateCrewMember.getUpdateCrewMember().update();

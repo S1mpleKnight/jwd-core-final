@@ -23,8 +23,8 @@ public class SearchMenu{
     private void printAvailableOptions(){
         System.out.println("Search options: ");
         System.out.println("c -> Search Crew Member");
-        System.out.println("s -> Search Spaceship");
-        System.out.println("f -> Search Flight Mission");
+       // System.out.println("s -> Search Spaceship");
+       // System.out.println("f -> Search Flight Mission");
         System.out.println("b -> Back");
     }
 
@@ -50,14 +50,14 @@ public class SearchMenu{
         switch (result){
             case "b":
                 break;
-            case "s":
-                LOGGER.info("Search Spaceship");
-
-                break;
-            case "f":
-                LOGGER.info("Search FlightMission");
-
-                break;
+//            case "s":
+//                LOGGER.info("Search Spaceship");
+//
+//                break;
+//            case "f":
+//                LOGGER.info("Search FlightMission");
+//
+//                break;
             case "c":
                 LOGGER.info("Search CrewMember");
                 SearchCrewMember.getSearchCrewMember().search();
