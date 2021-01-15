@@ -1,6 +1,8 @@
 package com.epam.jwd.core_final;
 
+import com.epam.jwd.core_final.context.impl.menu.NasaApplicationMenu;
 import com.epam.jwd.core_final.context.intf.Application;
+import com.epam.jwd.core_final.context.intf.ApplicationMenu;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 import com.epam.jwd.core_final.util.PropertyReaderUtil;
 import org.slf4j.Logger;
@@ -10,11 +12,14 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args){
+        LOGGER.info("Application started");
         try {
             PropertyReaderUtil.loadProperties();
             Application.start();
+            NasaApplicationMenu.getMenu().start();
         } catch (InvalidStateException e){
             LOGGER.error(e.getMessage());
         }
+        LOGGER.info("Application closed");
     }
 }

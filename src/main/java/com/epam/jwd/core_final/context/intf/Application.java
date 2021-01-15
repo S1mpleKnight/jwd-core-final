@@ -1,6 +1,6 @@
 package com.epam.jwd.core_final.context.intf;
 
-import com.epam.jwd.core_final.context.impl.NasaApplicationMenu;
+import com.epam.jwd.core_final.context.impl.menu.NasaApplicationMenu;
 import com.epam.jwd.core_final.context.impl.NasaContext;
 import com.epam.jwd.core_final.exception.InvalidStateException;
 
