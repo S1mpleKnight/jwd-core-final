@@ -34,7 +34,7 @@ public class InsertionMenu{
 
     public void insertionMenu(){
         printAvailableOptions();
-        System.out.println("Select option: ");
+        System.out.print("Select option: ");
         String str = SCANNER.nextLine();
         insertionSwitch(str);
     }
@@ -69,6 +69,7 @@ public class InsertionMenu{
     }
 
     private void crewMemberMenu(){
+        LOGGER.info("CrewMember creation");
         try{
             InsertCrewMember.getInsertCrewMember().insert();
             System.out.println("Crew member was created");
@@ -78,6 +79,7 @@ public class InsertionMenu{
     }
 
     private void flightMissionMenu(){
+        LOGGER.info("FlightMission creation");
         try{
             InsertFlightMission.getInsertFlightMission().insert();
         } catch (InvalidStateException | ArgumentNotFoundException e){
@@ -86,9 +88,10 @@ public class InsertionMenu{
     }
 
     private void spaceshipMenu(){
+        LOGGER.info("Spaceship creation");
         try{
             InsertSpaceship.getInsertSpaceship().insert();
-        } catch (InvalidStateException | ArgumentNotFoundException e){
+        } catch (InvalidStateException e){
             LOGGER.error(e.getMessage());
         }
     }

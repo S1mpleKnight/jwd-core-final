@@ -29,7 +29,7 @@ public class InsertSpaceship{
         return insertSpaceship;
     }
 
-    public void insert() throws InvalidStateException, ArgumentNotFoundException{
+    public void insert() throws InvalidStateException{
         List<String> list = takeArgs();
         Boolean check = checkInput(list);
         if (!check){
@@ -54,7 +54,7 @@ public class InsertSpaceship{
         System.out.print("Enter destination: ");
         args.add(SCANNER.nextLine());
         System.out.print("Enter crew: ");
-        args.add(SCANNER.nextLine());
+        args.add("{" + SCANNER.nextLine().trim() + "}");
         return args;
     }
 
@@ -63,7 +63,7 @@ public class InsertSpaceship{
             return false;
         } else if (!args.get(1).matches("[0-9]+")){
             return false;
-        } else if (!args.get(2).matches("[[0-9]:,]")
+        } else if (!args.get(2).matches("[0-9]:[0-9],[0-9]:[0-9],[0-9]:[0-9],[0-9]:[0-9]")
                 || args.get(2).length() != 15){
             return false;
         } else {
