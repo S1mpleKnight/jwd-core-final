@@ -8,6 +8,7 @@ import com.epam.jwd.core_final.domain.Role;
 import com.epam.jwd.core_final.service.impl.SimpleCrewService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class SearchCrewMember{
@@ -33,6 +34,10 @@ public class SearchCrewMember{
         for (CrewMember member : list){
             System.out.println(member.getName() + " id: " + member.getId());
         }
+    }
+
+    public Optional<CrewMember> searchForUpdate(){
+        return CREW_SERVICE.findCrewMemberByCriteria(takeCriteria());
     }
 
     private boolean includeField(String str){
@@ -65,8 +70,8 @@ public class SearchCrewMember{
         if (includeField("rank")){
             takeRankFromInput(builder);
         }
-        if (includeField("on mission")){
-            takeOnMissionFromInput(builder);
+        if (includeField("not on mission")){
+            takeNotOnMissionFromInput(builder);
         }
         if (includeField("is alive")){
             takeIsAlive(builder);
@@ -114,7 +119,7 @@ public class SearchCrewMember{
         }
     }
 
-    private void takeOnMissionFromInput(CrewMemberCriteria.CrewMemberCriteriaBuilder builder){
+    private void takeNotOnMissionFromInput(CrewMemberCriteria.CrewMemberCriteriaBuilder builder){
         System.out.print("Enter is on mission(true/false): ");
         String str = SCANNER.nextLine();
         if (!(str.matches("true") || str.matches("false"))){

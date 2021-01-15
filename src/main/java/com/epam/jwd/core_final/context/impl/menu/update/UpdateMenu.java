@@ -56,7 +56,8 @@ public class UpdateMenu{
 
                 break;
             case "c":
-
+                LOGGER.info("Update CrewMember");
+                UpdateCrewMember.getUpdateCrewMember().update();
                 break;
             default:
                 System.out.println("Wrong symbol.");
