@@ -1,38 +1,38 @@
-package com.epam.jwd.core_final.context.impl.menu;
+package com.epam.jwd.core_final.context.impl.menu.search;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class UpdateMenu{
-    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateMenu.class);
+public class SearchMenu{
+    private static final Logger LOGGER = LoggerFactory.getLogger(SearchMenu.class);
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static UpdateMenu updateMenu;
+    private static SearchMenu searchMenu;
 
-    private UpdateMenu(){
+    private SearchMenu(){
     }
 
-    public static UpdateMenu getUpdateMenu(){
-        if (updateMenu == null){
-            updateMenu = new UpdateMenu();
+    public static SearchMenu getSearchMenu(){
+        if (searchMenu == null){
+            searchMenu = new SearchMenu();
         }
-        return updateMenu;
+        return searchMenu;
     }
 
     private void printAvailableOptions(){
-        System.out.println("Update options: ");
-        System.out.println("c -> Update Crew Member");
-        System.out.println("s -> Update Spaceship");
-        System.out.println("f -> Update Flight Mission");
+        System.out.println("Search options: ");
+        System.out.println("c -> Search Crew Member");
+        System.out.println("s -> Search Spaceship");
+        System.out.println("f -> Search Flight Mission");
         System.out.println("b -> Back");
     }
 
-    public void updateMenu(){
+    public void searchMenu(){
         printAvailableOptions();
         System.out.println("Select option: ");
         String str = SCANNER.nextLine();
-        updateSwitch(str);
+        searchSwitch(str);
     }
 
     private Boolean handleUserInput(String str){
@@ -44,7 +44,7 @@ public class UpdateMenu{
         }
     }
 
-    private void updateSwitch(String str){
+    private void searchSwitch(String str){
         String result = waitingRightSymbol(str);
         switch (result){
             case "b":

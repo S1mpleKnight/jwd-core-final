@@ -1,5 +1,7 @@
-package com.epam.jwd.core_final.context.impl.menu;
+package com.epam.jwd.core_final.context.impl.menu.insertion;
 
+import com.epam.jwd.core_final.exception.ArgumentNotFoundException;
+import com.epam.jwd.core_final.exception.InvalidStateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +24,7 @@ public class InsertionMenu{
     }
 
     private void printAvailableOptions(){
+        System.out.println("---------------------------------");
         System.out.println("Insertion options: ");
         System.out.println("c -> Insert Crew Member");
         System.out.println("s -> Insert Spaceship");
@@ -34,8 +37,6 @@ public class InsertionMenu{
         System.out.println("Select option: ");
         String str = SCANNER.nextLine();
         insertionSwitch(str);
-
-
     }
 
     private Boolean handleUserInput(String str){
@@ -51,18 +52,44 @@ public class InsertionMenu{
         String result = waitingRightSymbol(str);
         switch (result){
             case "b":
-
                 break;
             case "s":
-
+                spaceshipMenu();
                 break;
             case "f":
+                flightMissionMenu();
                 break;
             case "c":
+                crewMemberMenu();
                 break;
             default:
                 System.out.println("Wrong symbol.");
                 break;
+        }
+    }
+
+    private void crewMemberMenu(){
+        try{
+            InsertCrewMember.getInsertCrewMember().insert();
+            System.out.println("Crew member was created");
+        } catch (InvalidStateException e){
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    private void flightMissionMenu(){
+        try{
+            InsertFlightMission.getInsertFlightMission().insert();
+        } catch (InvalidStateException | ArgumentNotFoundException e){
+            LOGGER.error(e.getMessage());
+        }
+    }
+
+    private void spaceshipMenu(){
+        try{
+            InsertSpaceship.getInsertSpaceship().insert();
+        } catch (InvalidStateException | ArgumentNotFoundException e){
+            LOGGER.error(e.getMessage());
         }
     }
 

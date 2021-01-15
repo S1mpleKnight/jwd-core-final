@@ -1,5 +1,8 @@
 package com.epam.jwd.core_final.context.impl;
 
+import com.epam.jwd.core_final.context.impl.menu.insertion.InsertionMenu;
+import com.epam.jwd.core_final.context.impl.menu.search.SearchMenu;
+import com.epam.jwd.core_final.context.impl.menu.update.UpdateMenu;
 import com.epam.jwd.core_final.context.intf.ApplicationContext;
 import com.epam.jwd.core_final.context.intf.ApplicationMenu;
 import org.slf4j.Logger;
@@ -69,13 +72,16 @@ public class NasaApplicationMenu implements ApplicationMenu{
                 printAvailableOptions();
                 return true;
             case "i":
-
+                InsertionMenu.getInsertionMenu().insertionMenu();
+                System.out.println("Main menu");
                 return true;
             case "s":
-
+                SearchMenu.getSearchMenu().searchMenu();
+                System.out.println("Main menu");
                 return true;
             case "u":
-                
+                UpdateMenu.getUpdateMenu().updateMenu();
+                System.out.println("Main menu");
                 return true;
             case "e":
                 LOGGER.info("Menu closed");

@@ -117,4 +117,14 @@ public class NasaContext implements ApplicationContext{
             flightMissions.add(factory.create(params.toArray()));
         }
     }
+
+    public void addCrewMember(CrewMember member){
+        crewMembers.add(member);
+    }
+    public void addFlightMission(FlightMission mission){
+        flightMissions.add(mission);
+    }
+    public void addSpaceship(Spaceship ship){
+        spaceships.add(ship);
+    }
 }

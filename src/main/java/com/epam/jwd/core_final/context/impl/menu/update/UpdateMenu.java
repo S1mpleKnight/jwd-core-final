@@ -1,38 +1,38 @@
-package com.epam.jwd.core_final.context.impl.menu;
+package com.epam.jwd.core_final.context.impl.menu.update;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
-public class SearchMenu{
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchMenu.class);
+public class UpdateMenu{
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateMenu.class);
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static SearchMenu searchMenu;
+    private static UpdateMenu updateMenu;
 
-    private SearchMenu(){
+    private UpdateMenu(){
     }
 
-    public static SearchMenu getSearchMenu(){
-        if (searchMenu == null){
-            searchMenu = new SearchMenu();
+    public static UpdateMenu getUpdateMenu(){
+        if (updateMenu == null){
+            updateMenu = new UpdateMenu();
         }
-        return searchMenu;
+        return updateMenu;
     }
 
     private void printAvailableOptions(){
-        System.out.println("Search options: ");
-        System.out.println("c -> Search Crew Member");
-        System.out.println("s -> Search Spaceship");
-        System.out.println("f -> Search Flight Mission");
+        System.out.println("Update options: ");
+        System.out.println("c -> Update Crew Member");
+        System.out.println("s -> Update Spaceship");
+        System.out.println("f -> Update Flight Mission");
         System.out.println("b -> Back");
     }
 
-    public void searchMenu(){
+    public void updateMenu(){
         printAvailableOptions();
         System.out.println("Select option: ");
         String str = SCANNER.nextLine();
-        searchSwitch(str);
+        updateSwitch(str);
     }
 
     private Boolean handleUserInput(String str){
@@ -44,16 +44,19 @@ public class SearchMenu{
         }
     }
 
-    private void searchSwitch(String str){
+    private void updateSwitch(String str){
         String result = waitingRightSymbol(str);
         switch (result){
             case "b":
                 break;
             case "s":
+
                 break;
             case "f":
+
                 break;
             case "c":
+
                 break;
             default:
                 System.out.println("Wrong symbol.");
